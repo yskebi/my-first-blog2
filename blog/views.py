@@ -1,7 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Post
-from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.shortcuts import redirect
 
@@ -24,7 +23,7 @@ def post_new(request):
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
-        form = PostForm(request.POST)
+        form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
 
 def post_edit(request, pk):
